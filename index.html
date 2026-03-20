@@ -8,19 +8,20 @@
 <style>
 body {
     font-family: 'Georgia', serif;
-    background: linear-gradient(to bottom, #f5f5f5, #ffffff);
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
     text-align: center;
     padding: 20px;
-    color: #333;
+    color: #fff;
 }
 
 .card {
     max-width: 600px;
     margin: auto;
-    background: white;
+    background: rgba(255,255,255,0.95);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    color: #333;
 }
 
 h1 {
@@ -47,6 +48,16 @@ h1 {
     background-color: #1a252f;
 }
 
+.music-btn {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #ff9800;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
 .footer {
     margin-top: 30px;
     font-style: italic;
@@ -55,6 +66,11 @@ h1 {
 </head>
 
 <body>
+
+<!-- Musik -->
+<audio id="musik" loop>
+    <source src="https://www.bensound.com/bensound-music/bensound-slowmotion.mp3" type="audio/mpeg">
+</audio>
 
 <div class="card">
     <h1>Undangan Arisan Keluarga</h1>
@@ -74,11 +90,13 @@ h1 {
         Rumah Bapak Ali Zakaria<br>
         Desa Bulila, Kec. Telaga, Kab. Gorontalo</p>
 
-        <!-- Tombol Maps -->
         <a class="button" href="https://maps.app.goo.gl/FCwVdp8WitmKRKeL8" target="_blank">
-            📍 Lihat Lokasi di Google Maps
+            📍 Lihat Lokasi
         </a>
     </div>
+
+    <!-- Tombol Musik -->
+    <button class="music-btn" onclick="toggleMusic()">🎵 Putar Musik</button>
 
     <p>
         Merupakan kebahagiaan bagi kami apabila
@@ -91,6 +109,18 @@ h1 {
 
     <p><b>Keluarga Besar Rumpun Zakaria</b></p>
 </div>
+
+<script>
+var musik = document.getElementById("musik");
+
+function toggleMusic() {
+    if (musik.paused) {
+        musik.play();
+    } else {
+        musik.pause();
+    }
+}
+</script>
 
 </body>
 </html>
