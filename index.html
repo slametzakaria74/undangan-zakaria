@@ -38,12 +38,20 @@ body {
 }
 
 .open-btn {
-    margin-top: 20px;
-    padding: 12px 25px;
-    background: white;
-    border-radius: 10px;
+    margin-top: 25px;
+    padding: 12px 30px;
+    font-size: 16px;
+    color: white;
+    background: linear-gradient(145deg, #ff9800, #e68900);
     border: none;
+    border-radius: 12px;
     cursor: pointer;
+    box-shadow: 0 6px #b36b00, 0 10px 20px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+}
+
+.open-btn:hover {
+    background: linear-gradient(145deg, #ffa726, #fb8c00);
 }
 
 /* CONTENT */
@@ -95,11 +103,16 @@ body {
 
 <!-- COVER -->
 <div id="cover">
-    <h1>Undangan Arisan Keluarga</h1>
-    <p id="namaTamu"></p>
-    <button class="open-btn" onclick="bukaUndangan()">Buka Undangan</button>
-</div>
+    <div class="cover-box">
+        <h1>Undangan Arisan Keluarga</h1>
+    </div>
 
+    <p id="namaTamu"></p>
+
+    <button class="open-btn" onclick="bukaUndangan()">
+        Buka Undangan
+    </button>
+</div>
 <!-- CONTENT -->
 <div id="content">
     <div class="card">
