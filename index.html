@@ -7,11 +7,47 @@
 
 <style>
 body {
+    margin: 0;
     font-family: 'Georgia', serif;
     background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
     text-align: center;
+}
+
+/* HALAMAN PEMBUKA */
+#cover {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#cover h1 {
+    font-size: 28px;
+}
+
+.open-btn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 16px;
+    background: #ffffff;
+    color: #2c3e50;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+/* HALAMAN ISI */
+#content {
+    display: none;
     padding: 20px;
-    color: #fff;
+    animation: fadeIn 1.5s;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
 
 .card {
@@ -20,17 +56,7 @@ body {
     background: rgba(255,255,255,0.95);
     padding: 30px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
     color: #333;
-}
-
-h1 {
-    color: #2c3e50;
-}
-
-.info {
-    margin: 20px 0;
-    line-height: 1.8;
 }
 
 .button {
@@ -41,25 +67,10 @@ h1 {
     color: white;
     text-decoration: none;
     border-radius: 8px;
-    font-weight: bold;
-}
-
-.button:hover {
-    background-color: #1a252f;
-}
-
-.music-btn {
-    margin-top: 20px;
-    padding: 10px 15px;
-    background: #ff9800;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
 }
 
 .footer {
-    margin-top: 30px;
+    margin-top: 20px;
     font-style: italic;
 }
 </style>
@@ -67,23 +78,31 @@ h1 {
 
 <body>
 
-<!-- Musik -->
+<!-- AUDIO -->
 <audio id="musik" loop>
     <source src="https://files.catbox.moe/0h8z6u.mp3" type="audio/mpeg">
 </audio>
 
-<div class="card">
+<!-- COVER -->
+<div id="cover">
     <h1>Undangan Arisan Keluarga</h1>
-    <h3>Rumpun Zakaria</h3>
+    <p>Rumpun Zakaria</p>
+    <button class="open-btn" onclick="bukaUndangan()">Buka Undangan</button>
+</div>
 
-    <p>Assalamu’alaikum Warahmatullahi Wabarakatuh,</p>
+<!-- ISI -->
+<div id="content">
+    <div class="card">
+        <h2>Undangan Arisan Keluarga</h2>
+        <h3>Rumpun Zakaria</h3>
 
-    <p>
+        <p>Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
+
+        <p>
         Dengan penuh rasa syukur, kami mengundang
         Bapak/Ibu/Saudara(i) untuk menghadiri acara arisan keluarga.
-    </p>
+        </p>
 
-    <div class="info">
         <p><b>Hari/Tanggal:</b> Senin, 23 Maret 2026</p>
         <p><b>Waktu:</b> 08.00 WITA – selesai</p>
         <p><b>Tempat:</b><br>
@@ -93,33 +112,28 @@ h1 {
         <a class="button" href="https://maps.app.goo.gl/FCwVdp8WitmKRKeL8" target="_blank">
             📍 Lihat Lokasi
         </a>
-    </div>
 
-    <!-- Tombol Musik -->
-    <button class="music-btn" onclick="toggleMusic()">🎵 Putar Musik</button>
-
-    <p>
+        <p>
         Merupakan kebahagiaan bagi kami apabila
         Bapak/Ibu/Saudara(i) dapat hadir.
-    </p>
+        </p>
 
-    <p class="footer">
+        <p class="footer">
         Wassalamu’alaikum Warahmatullahi Wabarakatuh
-    </p>
+        </p>
 
-    <p><b>Keluarga Besar Rumpun Zakaria</b></p>
+        <p><b>Keluarga Besar Rumpun Zakaria</b></p>
+    </div>
 </div>
 
 <script>
-var musik = document.getElementById("musik");
-musik.volume = 0.5;
+function bukaUndangan() {
+    document.getElementById("cover").style.display = "none";
+    document.getElementById("content").style.display = "block";
 
-function toggleMusic() {
-    if (musik.paused) {
-        musik.play();
-    } else {
-        musik.pause();
-    }
+    var musik = document.getElementById("musik");
+    musik.volume = 0.4;
+    musik.play();
 }
 </script>
 
