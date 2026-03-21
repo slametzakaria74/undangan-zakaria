@@ -9,36 +9,44 @@
 body {
     margin: 0;
     font-family: 'Georgia', serif;
-    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
     color: white;
     text-align: center;
+    overflow-x: hidden;
 }
 
-/* HALAMAN PEMBUKA */
+/* BUNGA JATUH */
+.flower {
+    position: fixed;
+    top: -10px;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+    }
+}
+
+/* COVER */
 #cover {
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-}
-
-#cover h1 {
-    font-size: 28px;
 }
 
 .open-btn {
     margin-top: 20px;
     padding: 12px 25px;
-    font-size: 16px;
-    background: #ffffff;
-    color: #2c3e50;
-    border: none;
+    background: white;
     border-radius: 10px;
+    border: none;
     cursor: pointer;
 }
 
-/* HALAMAN ISI */
+/* CONTENT */
 #content {
     display: none;
     padding: 20px;
@@ -61,7 +69,7 @@ body {
 
 .button {
     display: inline-block;
-    margin-top: 15px;
+    margin: 10px;
     padding: 12px 20px;
     background-color: #2c3e50;
     color: white;
@@ -69,9 +77,11 @@ body {
     border-radius: 8px;
 }
 
-.footer {
-    margin-top: 20px;
-    font-style: italic;
+/* COUNTDOWN */
+#countdown {
+    font-size: 18px;
+    margin: 15px 0;
+    font-weight: bold;
 }
 </style>
 </head>
@@ -86,22 +96,22 @@ body {
 <!-- COVER -->
 <div id="cover">
     <h1>Undangan Arisan Keluarga</h1>
-    <p>Rumpun Zakaria</p>
+    <p id="namaTamu"></p>
     <button class="open-btn" onclick="bukaUndangan()">Buka Undangan</button>
 </div>
 
-<!-- ISI -->
+<!-- CONTENT -->
 <div id="content">
     <div class="card">
+
         <h2>Undangan Arisan Keluarga</h2>
         <h3>Rumpun Zakaria</h3>
 
+        <p id="namaTamu2"></p>
+
         <p>Assalamu’alaikum Warahmatullahi Wabarakatuh</p>
 
-        <p>
-        Dengan penuh rasa syukur, kami mengundang
-        Bapak/Ibu/Saudara(i) untuk menghadiri acara arisan keluarga.
-        </p>
+        <div id="countdown"></div>
 
         <p><b>Hari/Tanggal:</b> Senin, 23 Maret 2026</p>
         <p><b>Waktu:</b> 08.00 WITA – selesai</p>
@@ -113,20 +123,14 @@ body {
             📍 Lihat Lokasi
         </a>
 
-        <p>
-        Merupakan kebahagiaan bagi kami apabila
-        Bapak/Ibu/Saudara(i) dapat hadir.
-        </p>
-
-        <p class="footer">
-        Wassalamu’alaikum Warahmatullahi Wabarakatuh
-        </p>
+        <p>Merupakan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara(i) dapat hadir.</p>
 
         <p><b>Keluarga Besar Rumpun Zakaria</b></p>
     </div>
 </div>
 
 <script>
+// MUSIK
 function bukaUndangan() {
     document.getElementById("cover").style.display = "none";
     document.getElementById("content").style.display = "block";
@@ -135,6 +139,45 @@ function bukaUndangan() {
     musik.volume = 0.4;
     musik.play();
 }
+
+// NAMA TAMU (opsional)
+const urlParams = new URLSearchParams(window.location.search);
+const nama = urlParams.get('to');
+
+if(nama){
+    document.getElementById("namaTamu").innerHTML = "Kepada Yth: " + nama;
+    document.getElementById("namaTamu2").innerHTML = "Kepada Yth: " + nama;
+}
+
+// COUNTDOWN
+const targetDate = new Date("March 23, 2026 08:00:00").getTime();
+
+setInterval(function(){
+    const now = new Date().getTime();
+    const distance = targetDate - now;
+
+    const d = Math.floor(distance / (1000*60*60*24));
+    const h = Math.floor((distance % (1000*60*60*24))/(1000*60*60));
+    const m = Math.floor((distance % (1000*60*60))/(1000*60));
+    const s = Math.floor((distance % (1000*60))/1000);
+
+    document.getElementById("countdown").innerHTML =
+    "⏳ " + d + " Hari " + h + " Jam " + m + " Menit " + s + " Detik";
+
+},1000);
+
+// BUNGA JATUH
+function createFlower(){
+    const flower = document.createElement("div");
+    flower.classList.add("flower");
+    flower.innerHTML = "🌸";
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (Math.random()*3+2)+"s";
+    document.body.appendChild(flower);
+
+    setTimeout(()=>{flower.remove()},5000);
+}
+setInterval(createFlower,300);
 </script>
 
 </body>
